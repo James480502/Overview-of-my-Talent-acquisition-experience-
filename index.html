@@ -198,6 +198,14 @@
       box-shadow: 0 8px 22px color-mix(in srgb, var(--menu-glow) 16%, rgba(0, 0, 0, 0.25));
     }
 
+    .menu-accent-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--menu-color) 25%, var(--bg));
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--menu-glow) 15%, transparent);
+    }
+
     .menu-color-picker-wrapper input[type="color"] {
       width: 22px;
       height: 22px;
@@ -209,7 +217,8 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
     }
 
-    .menu-randomizer {
+    .menu-randomizer,
+    .menu-reset {
       border: 1px solid color-mix(in srgb, var(--menu-glow) 25%, var(--border));
       background: rgba(15, 23, 42, 0.65);
       color: var(--muted);
@@ -224,7 +233,8 @@
       box-shadow: 0 10px 26px color-mix(in srgb, var(--menu-glow) 26%, rgba(0, 0, 0, 0.25));
     }
 
-    .menu-randomizer:hover {
+    .menu-randomizer:hover,
+    .menu-reset:hover {
       transform: translateY(-1px);
       box-shadow: 0 14px 34px color-mix(in srgb, var(--menu-glow) 40%, rgba(0, 0, 0, 0.28));
     }
@@ -731,8 +741,10 @@
 
         <div class="menu-color-picker-wrapper">
           <span>🎨 Menu</span>
+          <span id="menuAccentDot" class="menu-accent-dot" aria-hidden="true"></span>
           <input type="color" id="menuColorPicker" value="#e2e8f0" />
           <button id="menuRandomizer" class="menu-randomizer" type="button">🪄 Glow</button>
+          <button id="menuReset" class="menu-reset" type="button">↺ Reset</button>
         </div>
       </div>
     </nav>
@@ -990,13 +1002,18 @@
     setTheme(savedTheme || "dark");
 
     // Menu color picker + glow button (updates nav + buttons together)
+    const defaultMenuColor = "#e2e8f0";
     const menuColorPicker = document.getElementById("menuColorPicker");
     const menuRandomizer = document.getElementById("menuRandomizer");
+    const menuReset = document.getElementById("menuReset");
+    const menuAccentDot = document.getElementById("menuAccentDot");
     const menuPalettes = ["#8b5cf6", "#22d3ee", "#fb7185", "#38bdf8", "#fcd34d", "#7dd3fc", "#c084fc"];
 
     function applyMenuColor(color) {
       root.style.setProperty("--menu-color", color);
       root.style.setProperty("--menu-glow", color);
+      menuAccentDot.style.background = color;
+      menuAccentDot.style.boxShadow = `0 0 0 4px color-mix(in srgb, ${color} 15%, transparent)`;
       if (menuColorPicker.value.toLowerCase() !== color.toLowerCase()) {
         menuColorPicker.value = color;
       }
@@ -1009,6 +1026,12 @@
       applyMenuColor(pick);
       menuRandomizer.textContent = "🌈 Glow";
       setTimeout(() => (menuRandomizer.textContent = "🪄 Glow"), 600);
+    });
+
+    menuReset.addEventListener("click", () => {
+      applyMenuColor(defaultMenuColor);
+      menuReset.textContent = "✔ Reset";
+      setTimeout(() => (menuReset.textContent = "↺ Reset"), 700);
     });
 
     // Smooth scroll for nav
