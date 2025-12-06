@@ -8,7 +8,6 @@
     name="description"
     content="Modern portfolio of Panuwat Ainphuwa (James) – Talent Acquisition professional with experience in sourcing, screening, and interview coordination."
   />
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
   <style>
@@ -17,7 +16,7 @@
       --transition-fast: 0.2s ease-out;
       --transition-slow: 0.4s ease;
       --menu-color: #e2e8f0; /* default menu text color */
-      --menu-glow: #8b5cf6; /* shared menu + button accent */
+      --menu-glow: #8b5cf6;  /* shared menu + button accent */
     }
 
     /* LIGHT THEME */
@@ -313,6 +312,11 @@
       max-width: 520px;
     }
 
+    .hero-subtitle strong {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .playful-note {
       display: inline-flex;
       align-items: center;
@@ -336,11 +340,6 @@
       gap: 4px;
       font-size: 1.1rem;
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
-    }
-
-    .hero-subtitle strong {
-      color: var(--accent);
-      font-weight: 600;
     }
 
     .hero-cta-row {
@@ -794,28 +793,28 @@
           <span class="meta-chip">Agency & in-house recruitment experience</span>
         </div>
 
-          <div class="hero-badges">
-            <div class="hero-badge">
-              <span>01</span>
-              <div>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span>01</span>
+            <div>
               <div style="font-weight: 600; color: var(--text);">Talent Acquisition 💼</div>
               <div style="font-size: 0.82rem; color: var(--muted);">Tech & non-tech roles</div>
-              </div>
             </div>
-            <div class="hero-badge">
-              <span>02</span>
-              <div>
+          </div>
+          <div class="hero-badge">
+            <span>02</span>
+            <div>
               <div style="font-weight: 600; color: var(--text);">Candidate Focus 🤝</div>
               <div style="font-size: 0.82rem; color: var(--muted);">Human-first communication</div>
-              </div>
             </div>
-            <div class="hero-badge">
-              <span>03</span>
-              <div>
+          </div>
+          <div class="hero-badge">
+            <span>03</span>
+            <div>
               <div style="font-weight: 600; color: var(--text);">Workflow ⚙️</div>
               <div style="font-size: 0.82rem; color: var(--muted);">ATS + coordination</div>
-              </div>
             </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1001,7 +1000,7 @@
     // set default
     setTheme(savedTheme || "dark");
 
-    // Menu color picker + glow button (updates nav + buttons together)
+    // Menu color picker + glow button
     const defaultMenuColor = "#e2e8f0";
     const menuColorPicker = document.getElementById("menuColorPicker");
     const menuRandomizer = document.getElementById("menuRandomizer");
@@ -1106,7 +1105,7 @@
       dropSparkle(e.pageX, e.pageY);
     });
 
-    // initial sync for menu color on load
+    // initial menu color
     applyMenuColor(menuColorPicker.value);
   </script>
 </body>
